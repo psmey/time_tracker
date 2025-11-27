@@ -1,0 +1,450 @@
+openapi: "3.0.3"
+info:
+  title: ⏱️ Tempo Time Tracker API
+  description: A time tracker application to track your working hours and the ones of your peers!
+  version: "1.0"
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Local Development
+  - url: https://tempo-server.psm-home.net/api/v1
+    description: Production
+security:
+  - Authorization: []
+
+paths:
+  /calendars:
+    get:
+      tags:
+        - Calendars
+      summary: Get all calendars
+      operationId: getCalendars
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCalendars"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    post:
+      tags:
+        - Calendars
+      summary: Create a new calendar
+      operationId: postCalendar
+      requestBody:
+        $ref: "#/components/requestBodies/IncomingCalendar"
+      responses:
+        "201":
+          $ref: "#/components/responses/PostCalendar"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /calendars/{calendarId}:
+    get:
+      tags:
+        - Calendars
+      summary: Get a calendar
+      operationId: getCalendar
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCalendar"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    put:
+      tags:
+        - Calendars
+      summary: Update an existing calendar
+      operationId: putCalendar
+      requestBody:
+        $ref: "#/components/requestBodies/IncomingCalendar"
+      responses:
+        "200":
+          $ref: "#/components/responses/PutCalendar"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    delete:
+      tags:
+        - Calendars
+      summary: Delete a calendar
+      operationId: deleteCalendar
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /calendars/{calendarId}/events:
+    get:
+      tags:
+        - Events
+      summary: Get all events of a calendar
+      operationId: getEventsForCalendar
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEvents"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    post:
+      tags:
+        - Events
+      summary: Create an event for a calendar
+      operationId: postEvent
+      requestBody:
+        $ref: "#/components/requestBodies/IncomingEvent"
+      responses:
+        "201":
+          $ref: "#/components/responses/PostEvent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /calendars/{calendarId}/events/{eventId}:
+    get:
+      tags:
+        - Events
+      summary: Get an event
+      operationId: getEvent
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+        - $ref: "#/components/parameters/EventId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEvent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    put:
+      tags:
+        - Events
+      summary: Update an existing event
+      operationId: putEvent
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+        - $ref: "#/components/parameters/EventId"
+      requestBody:
+        $ref: "#/components/requestBodies/IncomingEvent"
+      responses:
+        "200":
+          $ref: "#/components/responses/PutEvent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+    delete:
+      tags:
+        - Events
+      summary: Delete an event
+      operationId: deleteEvent
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
+        - $ref: "#/components/parameters/EventId"
+      responses:
+        "204":
+          $ref: "#/components/responses/NoContent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+  /events:
+    get:
+      tags:
+        - Events
+      summary: Get all events
+      operationId: getEvents
+      responses:
+        "200":
+          $ref: "#/components/responses/GetEvents"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+components:
+  securitySchemes:
+    OAuth2 Authorization:
+      type: oauth2
+      description: Authorization description
+      flows:
+        implicit:
+          authorizationUrl: https://api.example.com/oauth2/authorize
+          scopes: {}
+  parameters:
+    CalendarId:
+      name: calendarId
+      in: path
+      required: true
+      description: The ID of the calendar
+      schema:
+        type: string
+        format: uuid
+    EventId:
+      name: eventId
+      in: path
+      required: true
+      description: The ID of the event
+      schema:
+        type: string
+        format: uuid
+  requestBodies:
+    IncomingCalendar:
+      description: Payload for creating or updating a calendar
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IncomingCalendar"
+    IncomingEvent:
+      description: Payload for creating or updating an event
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IncomingEvent"
+  responses:
+    # 200
+    Ok:
+      description: OK
+    # 204
+    NoContent:
+      description: No Content
+    # 400
+    BadRequest:
+      description: Bad Request
+    # 401
+    Unauthorized:
+      description: Unauthorized
+    # 404
+    NotFound:
+      description: Not Found
+    # 500
+    InternalServerError:
+      description: Internal Server Error
+    # 503
+    ServiceUnavailable:
+      description: Service Unavailable
+    GetCalendars:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/OutgoingCalendar"
+    PostCalendar:
+      description: Calendar successfully created
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingCalendar"
+    GetCalendar:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingCalendar"
+    PutCalendar:
+      description: Calendar successfully updated
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingCalendar"
+    GetEvents:
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/OutgoingEvent"
+    GetEvent:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingEvent"
+    PostEvent:
+      description: Event successfully created
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingEvent"
+    PutEvent:
+      description: Event successfully updated
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OutgoingEvent"
+  schemas:
+    CalendarId:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      required:
+        - id
+    IncomingCalendar:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        color:
+          $ref: "#/components/schemas/Colours"
+      required:
+        - name
+    OutgoingCalendar:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          minLength: 1
+        color:
+          $ref: "#/components/schemas/Colours"
+      required:
+        - id
+        - name
+    IncomingEvent:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        allDay:
+          type: boolean
+      required:
+        - title
+        - startDate
+        - endDate
+        - allDay
+    OutgoingEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        calendarId:
+          type: string
+          format: uuid
+        title:
+          type: string
+          minLength: 1
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        allDay:
+          type: boolean
+      required:
+        - id
+        - calendarId
+        - title
+        - startDate
+        - endDate
+        - allDay
+    Colours:
+      # https://www.color-meanings.com/primary-secondary-tertiary-colors/
+      type: string
+      enum:
+        - yellow
+        - amber
+        - orange
+        - vermillion
+        - red
+        - magenta
+        - purple
+        - violet
+        - blue
+        - teal
+        - green
+        - chartreuse
