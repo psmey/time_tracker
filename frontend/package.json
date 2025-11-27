@@ -11,15 +11,31 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.1",
+        "@fontsource/inter": "^5.2.8",
+        "@mui/icons-material": "^7.3.5",
+        "@mui/joy": "^5.0.0-beta.52",
+        "@mui/material": "^7.3.5",
         "react": "^19.2.0",
-        "react-dom": "^19.2.0"
+        "react-dom": "^19.2.0",
+        "react-router": "^7.9.6"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
+        "@fullcalendar/bootstrap5": "^6.1.19",
+        "@fullcalendar/core": "^6.1.19",
+        "@fullcalendar/daygrid": "^6.1.19",
+        "@fullcalendar/interaction": "^6.1.19",
+        "@fullcalendar/react": "^6.1.19",
+        "@fullcalendar/timegrid": "^6.1.19",
+        "@popperjs/core": "^2.11.8",
         "@types/node": "^24.10.1",
         "@types/react": "^19.2.5",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^5.1.1",
+        "bootstrap": "^5.3.8",
+        "bootstrap-icons": "^1.13.1",
         "eslint": "^9.39.1",
         "eslint-plugin-react-hooks": "^7.0.1",
         "eslint-plugin-react-refresh": "^0.4.24",
