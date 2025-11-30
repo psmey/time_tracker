@@ -1,4 +1,16 @@
 services:
+  backend:
+    build:
+      context:  .
+      dockerfile: backend/Dockerfile
+    restart: always
+    ports:
+      - 8081:8080
+    depends_on:
+      - db
+    volumes:
+    - ./backend/config.yaml:/opt/tempo_time_tracker/config.yaml:ro
+
   db:
     image: postgres:18.1
     restart: always
@@ -13,7 +25,7 @@ services:
     image: dpage/pgadmin4
     restart: always
     ports:
-      - 8082:80
+      - 8083:80
     environment:
       PGADMIN_DEFAULT_EMAIL: homelabpgadmin.dock353@passmail.net
       PGADMIN_DEFAULT_PASSWORD: pgadmin
@@ -26,7 +38,7 @@ services:
     image: quay.io/keycloak/keycloak:26.4.6
     restart: always
     ports:
-      - 8081:8080
+      - 8082:8080
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
