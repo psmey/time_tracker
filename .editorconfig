@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 
 [*.{yaml,yml,ts,tsx,js}]
 indent_size = 2
+
+[{makefile, Makefile,*.go}]
+indent_style = tab

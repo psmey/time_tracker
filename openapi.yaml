@@ -77,6 +77,8 @@ paths:
         - Calendars
       summary: Update an existing calendar
       operationId: putCalendar
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
       requestBody:
         $ref: "#/components/requestBodies/IncomingCalendar"
       responses:
@@ -138,6 +140,8 @@ paths:
         - Events
       summary: Create an event for a calendar
       operationId: postEvent
+      parameters:
+        - $ref: "#/components/parameters/CalendarId"
       requestBody:
         $ref: "#/components/requestBodies/IncomingEvent"
       responses:
@@ -240,12 +244,13 @@ paths:
           $ref: "#/components/responses/ServiceUnavailable"
 components:
   securitySchemes:
-    OAuth2 Authorization:
+    Authorization:
       type: oauth2
       description: Authorization description
       flows:
-        implicit:
-          authorizationUrl: https://api.example.com/oauth2/authorize
+        authorizationCode:
+          authorizationUrl: https://idp.psm-home.net/realms/<realm-name>/protocol/openid-connect/auth
+          tokenUrl: https://idp.psm-home.net/realms/<realm-name>/protocol/openid-connect/token
           scopes: {}
   parameters:
     CalendarId:

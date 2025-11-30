@@ -30,7 +30,7 @@ RUN wget -q https://github.com/hadolint/hadolint/releases/download/${HADOLINT_VE
     # Make executable
     && chmod +x hadolint-Linux-x86_64 \
     # Add to PATH
-    && mv hadolint-Linux-x86_64 /bin/hadolint \
+    && mv hadolint-Linux-x86_64 /usr/local/bin/hadolint \
     # Verify installation
     && hadolint --version
 
@@ -52,3 +52,15 @@ RUN wget -q https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh -O /
     && yarn -v
 
 ### BACKEND ###
+
+# Install golang
+RUN wget -q --directory-prefix /tmp https://go.dev/dl/go1.25.4.linux-amd64.tar.gz \
+    && echo "9fa5ffeda4170de60f67f3aa0f824e426421ba724c21e133c1e35d6159ca1bec /tmp/go1.25.4.linux-amd64.tar.gz" | sha256sum -c - \
+    && tar -C /usr/local/ -xzf /tmp/go1.25.4.linux-amd64.tar.gz \
+    && rm /tmp/go1.25.4.linux-amd64.tar.gz
+
+# Add go to PATH
+ENV PATH=$PATH:/usr/local/go/bin
+
+# Verify installation
+RUN go version

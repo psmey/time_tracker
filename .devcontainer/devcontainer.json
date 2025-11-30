@@ -16,13 +16,13 @@
                 "DavidAnson.vscode-markdownlint",
                 "streetsidesoftware.code-spell-checker",
                 "redhat.vscode-yaml",
+                "mikestead.dotenv",
                 // frontend
                 "yoavbls.pretty-ts-errors",
                 "dbaeumer.vscode-eslint",
                 // backend
                 "golang.Go",
                 "ms-vscode.makefile-tools",
-                "emeraldwalk.RunOnSave",
                 // api
                 "42Crunch.vscode-openapi"
             ]
