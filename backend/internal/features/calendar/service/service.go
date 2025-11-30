@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/google/uuid"
-	"github.com/psmey/time_tracker/internal/calendar/repository"
+	"github.com/psmey/time_tracker/internal/features/calendar/repository"
 )
 
 type ServicePort interface {

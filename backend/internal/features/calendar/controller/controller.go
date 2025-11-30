@@ -3,12 +3,12 @@ package controller
 import (
 	"net/http"
 
-	"github.com/psmey/time_tracker/internal/api"
-	"github.com/psmey/time_tracker/internal/calendar/domain"
-	"github.com/psmey/time_tracker/internal/calendar/service"
+	"github.com/psmey/time_tracker/internal/features/calendar/domain"
+	"github.com/psmey/time_tracker/internal/features/calendar/service"
+	"github.com/psmey/time_tracker/internal/http/api"
 )
 
-type CalendarControllerPort interface {
+type ControllerPort interface {
 	DeleteCalendar(writer http.ResponseWriter, request *http.Request, id api.CalendarId)
 }
 
@@ -16,7 +16,7 @@ type ControllerAdapter struct {
 	service service.ServicePort
 }
 
-var _ CalendarControllerPort = &ControllerAdapter{}
+var _ ControllerPort = &ControllerAdapter{}
 
 func New(service service.ServicePort) *ControllerAdapter {
 	return &ControllerAdapter{service: service}

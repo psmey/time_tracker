@@ -5,7 +5,7 @@ import (
 	"database/sql"
 
 	"github.com/google/uuid"
-	"github.com/psmey/time_tracker/internal/calendar/domain"
+	"github.com/psmey/time_tracker/internal/features/calendar/domain"
 )
 
 type RepositoryPort interface {

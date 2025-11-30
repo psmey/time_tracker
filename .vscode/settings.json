@@ -2,8 +2,10 @@
     "cSpell.caseSensitive": true,
     "cSpell.language": "en-GB",
     "cSpell.words": [
+        "dbname",
         "noninteractive",
-        "pgadmin"
+        "pgadmin",
+        "sslmode"
     ],
     "editor.codeActionsOnSave": {
         "source.fixAll": "always"
