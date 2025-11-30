@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:18.1
+    restart: always
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: homelabpgadmin.dock353@passmail.net
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+      PGADMIN_REPLACE_SERVERS_ON_STARTUP: true
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin_config:/pgadmin4
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.6
+    restart: always
+    ports:
+      - 8081:8080
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    command: start-dev
+
+volumes:
+  keycloak_data:
+  pgadmin_data:
+  pgadmin_config:
