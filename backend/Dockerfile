@@ -11,7 +11,7 @@ COPY backend/ .
 
 RUN go build -o tempo_time_tracker ./cmd/backend
 
-FROM alpine:latest
+FROM alpine:3.22.2
 
 WORKDIR /opt/tempo_time_tracker
 
