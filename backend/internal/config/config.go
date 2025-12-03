@@ -1,24 +1,20 @@
-package configloader
+package config
 
 import (
 	"fmt"
 	"os"
 
 	"github.com/psmey/time_tracker/internal/database"
+	"github.com/psmey/time_tracker/internal/logging"
 	"gopkg.in/yaml.v3"
 )
 
-type ConfigLoader struct{}
-
 type Config struct {
+	Logger   *logging.Config  `yaml:"logger"`
 	Database *database.Config `yaml:"database"`
 }
 
-func New() *ConfigLoader {
-	return &ConfigLoader{}
-}
-
-func (configLoader *ConfigLoader) Load(path string) (*Config, error) {
+func Load(path string) (*Config, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open config file: %w", err)
