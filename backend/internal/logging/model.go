@@ -2,7 +2,7 @@ package logging
 
 type Config struct {
 	OutputType OutputType `yaml:"outputType"`
-	Level      LogLevel   `yaml:"level"`
+	Level      LogLevel   `yaml:"logLevel"`
 }
 
 type OutputType string

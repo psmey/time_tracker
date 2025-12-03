@@ -7,7 +7,7 @@ import (
 	"github.com/psmey/time_tracker/internal/features/calendar/service"
 )
 
-func NewCalendarController(config *database.Config) (*controller.ControllerAdapter, error) {
+func NewCalendarController(config *database.Config) (*controller.Controller, error) {
 	connector := database.NewConnector(config)
 	db, err := connector.NewPostgresDB("calendars")
 	if err != nil {

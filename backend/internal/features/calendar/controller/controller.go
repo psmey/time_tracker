@@ -8,21 +8,21 @@ import (
 	"github.com/psmey/time_tracker/internal/http/api"
 )
 
-type ControllerPort interface {
+type ControllerInterface interface {
 	DeleteCalendar(writer http.ResponseWriter, request *http.Request, id api.CalendarId)
 }
 
-type ControllerAdapter struct {
+type Controller struct {
 	service service.ServicePort
 }
 
-var _ ControllerPort = &ControllerAdapter{}
+var _ ControllerInterface = &Controller{}
 
-func New(service service.ServicePort) *ControllerAdapter {
-	return &ControllerAdapter{service: service}
+func New(service service.ServicePort) *Controller {
+	return &Controller{service: service}
 }
 
-func (controller *ControllerAdapter) DeleteCalendar(writer http.ResponseWriter, request *http.Request, id api.CalendarId) {
+func (controller *Controller) DeleteCalendar(writer http.ResponseWriter, request *http.Request, id api.CalendarId) {
 	err := controller.service.DeleteCalendar(id)
 	if err != nil {
 		switch err {
