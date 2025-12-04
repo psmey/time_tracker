@@ -1,7 +1,7 @@
 BIN_DIR := ./bin
 BIN_PATH := $(BIN_DIR)/time_tracker_backend
 CMD_DIR := ./cmd/backend
-OPENAPI_SPEC_PATH := ../openapi.yaml
+OPENAPI_SPEC_PATH := ../api/openapi.yaml
 OAPI_CODEGEN_CONFIG_PATH := ./oapi_codegen_config.yaml
 
 .PHONY: run
