@@ -1,17 +1,54 @@
-package logging
+package logger
 
 import (
 	"log/slog"
 	"os"
 )
 
-func Init(config *Config) *slog.Logger {
+type Config struct {
+	OutputType OutputType `yaml:"outputType"`
+	Level      LogLevel   `yaml:"logLevel"`
+}
 
+type OutputType string
+
+const (
+	OutputTypeJson OutputType = "json"
+	OutputTypeText OutputType = "text"
+)
+
+type LogLevel string
+
+const (
+	LogLevelDebug LogLevel = "debug"
+	LogLevelInfo  LogLevel = "info"
+	LogLevelWarn  LogLevel = "warn"
+	LogLevelError LogLevel = "error"
+)
+
+var logger *slog.Logger
+
+func Init(config *Config) {
 	options := setUpHandlerOptions(config.Level)
 	handler := setUpHandler(config.OutputType, options)
-	logger := slog.New(handler)
+	logger = slog.New(handler)
+}
 
-	return logger
+func LogDebug(message string, args ...any) {
+	ensureLogger().Debug(message, args...)
+}
+
+func LogInfo(message string, args ...any) {
+	ensureLogger().Info(message, args...)
+}
+
+func LogWarn(message string, args ...any) {
+	ensureLogger().Warn(message, args...)
+}
+
+func LogError(message string, err error, args ...any) {
+	allArgs := append([]any{"error", err}, args...)
+	ensureLogger().Error(message, allArgs...)
 }
 
 func setUpHandlerOptions(logLevel LogLevel) *slog.HandlerOptions {
@@ -51,4 +88,11 @@ func setUpHandler(outputType OutputType, options *slog.HandlerOptions) slog.Hand
 	}
 
 	return handler
+}
+
+func ensureLogger() *slog.Logger {
+	if logger == nil {
+		return slog.Default()
+	}
+	return logger
 }

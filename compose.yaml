@@ -6,8 +6,6 @@ services:
     restart: always
     ports:
       - 8081:8080
-    depends_on:
-      - db
     volumes:
     - ./backend/config.yaml:/opt/tempo_time_tracker/config.yaml:ro
 

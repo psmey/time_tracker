@@ -9,7 +9,11 @@ import (
 )
 
 type RepositoryPort interface {
+	// GetCalendars() error
+	// PostCalendar() error
 	DeleteCalendar(id uuid.UUID) error
+	// GetCalendar(id uuid.UUID) error
+	// PutCalendar(id uuid.UUID) error
 }
 
 type PostgresRepositoryAdapter struct {

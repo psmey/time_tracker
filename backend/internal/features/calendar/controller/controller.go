@@ -9,7 +9,11 @@ import (
 )
 
 type ControllerInterface interface {
-	DeleteCalendar(writer http.ResponseWriter, request *http.Request, id api.CalendarId)
+	// GetCalendars(writer http.ResponseWriter, request *http.Request)
+	// PostCalendar(writer http.ResponseWriter, request *http.Request)
+	DeleteCalendar(writer http.ResponseWriter, request *http.Request, calendarId api.CalendarId)
+	// GetCalendar(writer http.ResponseWriter, request *http.Request, calendarId api.CalendarId)
+	// PutCalendar(writer http.ResponseWriter, request *http.Request, calendarId api.CalendarId)
 }
 
 type Controller struct {

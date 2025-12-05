@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/psmey/time_tracker/internal/auth/keycloak"
 	"github.com/psmey/time_tracker/internal/database"
-	"github.com/psmey/time_tracker/internal/logging"
+	"github.com/psmey/time_tracker/internal/logger"
 	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
-	Logger   *logging.Config  `yaml:"logger"`
+	Logger   *logger.Config   `yaml:"logger"`
 	Database *database.Config `yaml:"database"`
+	Keycloak *keycloak.Config `yaml:"keycloak"`
 }
 
 func Load(path string) (*Config, error) {
