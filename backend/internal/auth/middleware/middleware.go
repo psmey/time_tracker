@@ -17,11 +17,12 @@ type AuthProvider interface {
 func New(authProvider AuthProvider) api.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-			logger.LogDebug("Handling authentication for request", "request", request)
+			logger.LogHttpDebug("Handling authentication for request", request)
+
 			authHeader := request.Header.Get("Authorization")
 
 			if authHeader == "" || !strings.HasPrefix(authHeader, "Bearer ") {
-				logger.LogWarn("Invalid authorization header", "request", request)
+				logger.LogHttpWarn("Invalid authorization header", request)
 				http.Error(writer, "Unauthorized", http.StatusUnauthorized)
 				return
 			}
@@ -29,7 +30,7 @@ func New(authProvider AuthProvider) api.MiddlewareFunc {
 			token := strings.TrimPrefix(authHeader, "Bearer ")
 			claims, err := authProvider.ValidateToken(request.Context(), token)
 			if err != nil {
-				logger.LogWarn("Invalid token used", "request", request)
+				logger.LogHttpWarn("Invalid token used", request)
 				http.Error(writer, "Unauthorized", http.StatusUnauthorized)
 				return
 			}

@@ -10,7 +10,7 @@ import (
 func New() api.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-			logger.LogInfo("Handling Request", "request", request)
+			logger.LogHttpInfo("Handling Request", request)
 
 			next.ServeHTTP(writer, request)
 		})
