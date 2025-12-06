@@ -246,11 +246,11 @@ components:
   securitySchemes:
     Authorization:
       type: oauth2
-      description: Authorization description
+      description: OAuth2 Authorization Code Flow (Keycloak)
       flows:
         authorizationCode:
-          authorizationUrl: https://idp.psm-home.net/realms/<realm-name>/protocol/openid-connect/auth
-          tokenUrl: https://idp.psm-home.net/realms/<realm-name>/protocol/openid-connect/token
+          authorizationUrl: http://localhost:8082/realms/tempo-time-tracker/protocol/openid-connect/auth
+          tokenUrl: http://localhost:8082/realms/tempo-time-tracker/protocol/openid-connect/token
           scopes: {}
   parameters:
     CalendarId:

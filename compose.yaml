@@ -51,6 +51,8 @@ services:
       - 8084:8080
     environment:
       SWAGGER_JSON: /spec/openapi.yaml
+      OAUTH_CLIENT_ID: swagger
+      OAUTH_USE_PKCE: true
     volumes:
       - ./api/openapi.yaml:/spec/openapi.yaml:ro
 
